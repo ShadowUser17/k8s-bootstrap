@@ -1,0 +1,24 @@
+apiVersion: "source.toolkit.fluxcd.io/v1beta2"
+kind: "GitRepository"
+metadata:
+  namespace: "flux-system"
+  name: "bootstrap"
+spec:
+  interval: "1m0s"
+  url: "https://github.com/ShadowUser17/k8s-bootstrap.git"
+  ref:
+    branch: "master"
+
+---
+apiVersion: "kustomize.toolkit.fluxcd.io/v1beta2"
+kind: "Kustomization"
+metadata:
+  namespace: "flux-system"
+  name: "base"
+spec:
+  path: "./base"
+  prune: true
+  interval: "1m0s"
+  sourceRef:
+    kind: "GitRepository"
+    name: "bootstrap"
