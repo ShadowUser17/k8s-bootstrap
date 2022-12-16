@@ -2,23 +2,23 @@ apiVersion: "source.toolkit.fluxcd.io/v1beta2"
 kind: "GitRepository"
 metadata:
   namespace: "flux-system"
-  name: "bootstrap"
+  name: "flagger"
 spec:
-  interval: "2m"
-  url: "https://github.com/ShadowUser17/k8s-bootstrap.git"
+  interval: "6h"
+  url: "https://github.com/fluxcd/flagger.git"
   ref:
-    branch: "master"
+    branch: "main"
 
 ---
 apiVersion: "kustomize.toolkit.fluxcd.io/v1beta2"
 kind: "Kustomization"
 metadata:
   namespace: "flux-system"
-  name: "base"
+  name: "flagger"
 spec:
-  path: "./base"
+  path: "./kustomize/kubernetes"
   prune: true
-  interval: "2m"
+  interval: "6h"
   sourceRef:
     kind: "GitRepository"
-    name: "bootstrap"
+    name: "flagger"

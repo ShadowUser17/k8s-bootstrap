@@ -1,0 +1,10 @@
+apiVersion: "source.toolkit.fluxcd.io/v1beta2"
+kind: "GitRepository"
+metadata:
+  namespace: "flux-system"
+  name: "docker-templates"
+spec:
+  interval: "2m"
+  url: "https://github.com/ShadowUser17/DockerTemplates.git"
+  ref:
+    branch: "master"
