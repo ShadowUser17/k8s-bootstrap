@@ -1,5 +1,4 @@
 resources:
   - "cert-manager-v1.10.1.yaml"
   - "ingress-nginx-v1.4.0.yaml"
-  - "sealed-secrets-v0.19.3.yaml"
   - "testing-ns.yaml"
