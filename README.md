@@ -17,6 +17,16 @@ kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/m
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/flagger-kubernetes.yaml"
 ```
 
+#### Configure nfs-provisioner for lima repository:
+```bash
+kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs/lima/fluxcd-deploy.yml"
+```
+
+#### Configure nfs-provisioner for vagrant repository:
+```bash
+kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs/vagrant/fluxcd-deploy.yml"
+```
+
 #### Configure optional repositories:
 ```bash
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/docker-templates.yaml"

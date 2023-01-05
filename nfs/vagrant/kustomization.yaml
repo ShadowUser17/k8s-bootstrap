@@ -1,0 +1,10 @@
+namespace: "nfs-provisioner"
+
+resources:
+  - "../base/namespace.yaml"
+  - "../base/class.yaml"
+  - "../base/rbac.yaml"
+  - "../base/deployment.yaml"
+
+patchesStrategicMerge:
+  - "patch.yaml"
