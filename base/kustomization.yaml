@@ -1,5 +1,5 @@
 resources:
-  - "cert-manager-v1.10.1.yaml"
+  - "cert-manager-v1.10.2.yaml"
   - "ingress-nginx-v1.5.1.yaml"
   - "flux2-v0.38.3.yaml"
   - "testing-ns.yaml"
