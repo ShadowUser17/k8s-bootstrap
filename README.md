@@ -12,22 +12,27 @@ kubectl apply -k "github.com/ShadowUser17/k8s-bootstrap/base"
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/k8s-bootstrap.yaml"
 ```
 
-#### Configure flagger repository:
+#### Configure optional repositories:
+```bash
+kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/docker-templates.yaml"
+```
+
+#### Deploy flagger components:
 ```bash
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/flagger-kubernetes.yaml"
 ```
 
-#### Configure nfs-provisioner for lima repository:
+#### Deploy kyverno components:
+```bash
+kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/kyverno/fluxcd-deploy.yml"
+```
+
+#### Deploy nfs-provisioner for lima:
 ```bash
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs/lima/fluxcd-deploy.yml"
 ```
 
-#### Configure nfs-provisioner for vagrant repository:
+#### Deploy nfs-provisioner for vagrant repository:
 ```bash
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs/vagrant/fluxcd-deploy.yml"
-```
-
-#### Configure optional repositories:
-```bash
-kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/docker-templates.yaml"
 ```
