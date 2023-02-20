@@ -1,7 +1,7 @@
 resources:
   - "cert-manager-v1.10.2.yaml"
   - "ingress-nginx-v1.6.4.yaml"
-  - "flux2-v0.38.3.yaml"
+  - "flux2-v0.40.0.yaml"
   - "testing-ns.yaml"
 
 patchesStrategicMerge:
