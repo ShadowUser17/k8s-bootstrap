@@ -1,0 +1,8 @@
+namespace: "nfs-subdir-external-provisioner"
+
+resources:
+  - "namespace.yaml"
+  - "deployment-v4.0.18.yaml"
+
+patchesStrategicMerge:
+  - "patch.yaml"

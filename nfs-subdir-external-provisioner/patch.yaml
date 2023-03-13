@@ -2,20 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nfs-client-provisioner
-  name: nfs-client-provisioner
+    app: nfs-subdir-external-provisioner
+    release: nfs-subdir-external-provisioner
+  name: nfs-subdir-external-provisioner
 spec:
   template:
     spec:
       containers:
-        - name: nfs-client-provisioner
+        - name: nfs-subdir-external-provisioner
           env:
             - name: NFS_SERVER
               value: "192.168.56.13"
             - name: NFS_PATH
               value: "/var/nfs"
       volumes:
-        - name: nfs-client-root
+        - name: nfs-subdir-external-provisioner-root
           nfs:
             server: "192.168.56.13"
             path: "/var/nfs"

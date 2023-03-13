@@ -27,12 +27,7 @@ kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/m
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/kyverno/fluxcd-deploy.yml"
 ```
 
-#### Deploy nfs-provisioner for lima:
+#### Deploy nfs-subdir-external-provisioner:
 ```bash
-kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs/lima/fluxcd-deploy.yml"
-```
-
-#### Deploy nfs-provisioner for vagrant repository:
-```bash
-kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs/vagrant/fluxcd-deploy.yml"
+kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs-subdir-external-provisioner/fluxcd-deploy.yml"
 ```

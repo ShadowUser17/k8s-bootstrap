@@ -4,7 +4,7 @@ metadata:
   namespace: "flux-system"
   name: "nfs"
 spec:
-  path: "./nfs/lima"
+  path: "./nfs-subdir-external-provisioner"
   prune: true
   interval: "2m"
   sourceRef:
