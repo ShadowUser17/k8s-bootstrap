@@ -31,3 +31,8 @@ kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/m
 ```bash
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs-subdir-external-provisioner/fluxcd-deploy.yml"
 ```
+
+#### Deploy vertical-pod-autoscaler:
+```bash
+kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/vertical-pod-autoscaler/fluxcd-deploy.yml"
+```

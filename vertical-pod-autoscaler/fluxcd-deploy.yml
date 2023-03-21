@@ -1,0 +1,12 @@
+apiVersion: "kustomize.toolkit.fluxcd.io/v1beta2"
+kind: "Kustomization"
+metadata:
+  namespace: "flux-system"
+  name: "vertical-pod-autoscaler"
+spec:
+  path: "./vertical-pod-autoscaler"
+  prune: true
+  interval: "2m"
+  sourceRef:
+    kind: "GitRepository"
+    name: "bootstrap"
