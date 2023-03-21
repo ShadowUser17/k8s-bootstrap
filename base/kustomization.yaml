@@ -3,6 +3,7 @@ resources:
   - "ingress-nginx-v1.6.4.yaml"
   - "flux2-v0.41.2.yaml"
   - "testing-ns.yaml"
+  - "default-ns.yaml"
 
 patchesStrategicMerge:
   - "ingress-nginx-patch.yaml"
