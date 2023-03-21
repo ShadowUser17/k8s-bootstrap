@@ -1,0 +1,2 @@
+vertical-pod-autoscaler/certs/*.srl
+vertical-pod-autoscaler/certs/*.csr
