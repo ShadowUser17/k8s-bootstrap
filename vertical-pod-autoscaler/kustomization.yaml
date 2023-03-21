@@ -1,3 +1,13 @@
 # VPA 0.11 is compatible with K8S 1.22-1.24 
 resources:
   - "vpa-release-v0.11.yml"
+
+secretGenerator:
+  - name: "vpa-tls-certs"
+    type: "Opaque"
+    namespace: "kube-system"
+    files:
+      - "certs/caKey.pem"
+      - "certs/caCert.pem"
+      - "certs/serverKey.pem"
+      - "certs/serverCert.pem"
