@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpa-admission-controller
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: vpa-admission-controller
+  template:
+    metadata:
+      labels:
+        app: vpa-admission-controller
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8944"
+    spec:
+      serviceAccountName: vpa-admission-controller
+      containers:
+      - name: admission-controller
+        ports:
+        - containerPort: 8000
+        - containerPort: 8944
+          name: prometheus
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            cpu: 100m
+            memory: 512Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpa-recommender
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: vpa-recommender
+  template:
+    metadata:
+      labels:
+        app: vpa-recommender
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8942"
+    spec:
+      serviceAccountName: vpa-recommender
+      containers:
+      - name: recommender
+        ports:
+        - containerPort: 8942
+          name: prometheus
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            cpu: 100m
+            memory: 512Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpa-updater
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      app: vpa-updater
+  template:
+    metadata:
+      labels:
+        app: vpa-updater
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8943"
+    spec:
+      serviceAccountName: vpa-updater
+      containers:
+      - name: updater
+        ports:
+        - containerPort: 8943
+          name: prometheus
+        resources:
+          requests:
+            cpu: 50m
+            memory: 256Mi
+          limits:
+            cpu: 100m
+            memory: 512Mi

@@ -2,6 +2,9 @@
 resources:
   - "vpa-release-v0.11.yml"
 
+patchesStrategicMerge:
+  - "vpa-release-patch.yml"
+
 secretGenerator:
   - name: "vpa-tls-certs"
     type: "Opaque"
