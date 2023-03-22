@@ -1,4 +1,5 @@
-# VPA 0.11 is compatible with K8S 1.22-1.24 
+# VPA 0.11 is compatible with K8S 1.22-1.24
+# VPA 0.13 is compatible with K8S 1.25+
 resources:
   - "vpa-release-v0.11.yml"
 
