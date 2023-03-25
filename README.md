@@ -16,23 +16,3 @@ kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/m
 ```bash
 kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/docker-templates.yaml"
 ```
-
-#### Deploy flagger components:
-```bash
-kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/flux/flagger-kubernetes.yaml"
-```
-
-#### Deploy kyverno components:
-```bash
-kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/kyverno/fluxcd-deploy.yml"
-```
-
-#### Deploy nfs-subdir-external-provisioner:
-```bash
-kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/nfs-subdir-external-provisioner/fluxcd-deploy.yml"
-```
-
-#### Deploy vertical-pod-autoscaler:
-```bash
-kubectl apply -f "https://raw.githubusercontent.com/ShadowUser17/k8s-bootstrap/master/vertical-pod-autoscaler/fluxcd-deploy.yml"
-```
