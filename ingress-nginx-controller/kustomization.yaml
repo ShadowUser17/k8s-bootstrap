@@ -1,0 +1,3 @@
+resources:
+  - "nginx-ingress-ns.yaml"
+  - "nginx-ingress-helm-v0.16.2.yaml"
