@@ -1,2 +1,2 @@
 resources:
-  - "cert-manager-v1.11.1.yaml"
+  - "cert-manager-v1.11.2.yaml"
