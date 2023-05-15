@@ -1,2 +1,2 @@
 resources:
-  - "sealed-secrets-v0.20.5.yml"
+  - "sealed-secrets-v0.21.0.yml"
