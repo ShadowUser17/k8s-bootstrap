@@ -1,5 +1,5 @@
 resources:
-  - "kyverno-v1.9.4.yml"
+  - "kyverno-v1.9.5.yml"
 
 patchesStrategicMerge:
   - "kyverno-patch.yaml"
