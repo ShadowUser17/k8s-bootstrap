@@ -1,5 +1,5 @@
 resources:
-  - "ingress-nginx-v1.7.1.yaml"
+  - "ingress-nginx-v1.8.0.yaml"
 
 patchesStrategicMerge:
   - "ingress-nginx-patch.yaml"
