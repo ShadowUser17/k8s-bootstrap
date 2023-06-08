@@ -1,0 +1,2 @@
+resources:
+  - "ingress-traefik-v2.10.1.yaml"
