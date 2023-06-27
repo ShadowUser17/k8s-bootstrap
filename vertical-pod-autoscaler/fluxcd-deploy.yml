@@ -6,7 +6,7 @@ metadata:
 spec:
   path: "./vertical-pod-autoscaler"
   prune: true
-  interval: "2m"
+  interval: "5m"
   sourceRef:
     kind: "GitRepository"
     name: "bootstrap"

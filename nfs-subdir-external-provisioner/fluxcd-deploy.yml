@@ -6,7 +6,7 @@ metadata:
 spec:
   path: "./nfs-subdir-external-provisioner"
   prune: true
-  interval: "2m"
+  interval: "5m"
   sourceRef:
     kind: "GitRepository"
     name: "bootstrap"

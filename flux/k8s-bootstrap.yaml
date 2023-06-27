@@ -4,7 +4,7 @@ metadata:
   namespace: "flux-system"
   name: "bootstrap"
 spec:
-  interval: "2m"
+  interval: "5m"
   url: "https://github.com/ShadowUser17/k8s-bootstrap.git"
   ref:
     branch: "master"
@@ -18,7 +18,7 @@ metadata:
 spec:
   path: "./base"
   prune: true
-  interval: "2m"
+  interval: "5m"
   sourceRef:
     kind: "GitRepository"
     name: "bootstrap"
