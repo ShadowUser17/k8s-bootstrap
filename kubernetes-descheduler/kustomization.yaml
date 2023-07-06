@@ -1,0 +1,5 @@
+resources:
+  - "descheduler-v0.25.1.yaml"
+
+patchesStrategicMerge:
+  - "descheduler-patch.yaml"
