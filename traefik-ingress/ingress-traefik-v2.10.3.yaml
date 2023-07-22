@@ -105,11 +105,11 @@ spec:
     app.kubernetes.io/name: traefik
     app.kubernetes.io/instance: traefik-kube-system
   ports:
-  - port: 80
+  - port: 8000
     name: "web"
     targetPort: web
     protocol: TCP
-  - port: 443
+  - port: 8443
     name: "websecure"
     targetPort: websecure
     protocol: TCP

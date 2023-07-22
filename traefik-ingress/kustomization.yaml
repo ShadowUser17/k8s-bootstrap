@@ -1,4 +1,4 @@
 namespace: "kube-system"
 resources:
   - "kubernetes-crd-definition-v1.yml"
-  - "ingress-traefik-v2.10.1.yaml"
+  - "ingress-traefik-v2.10.3.yaml"
