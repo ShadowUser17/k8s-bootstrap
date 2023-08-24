@@ -1,4 +1,4 @@
 resources:
-  - "flux2-v2.0.1.yaml"
+  - "flux2-v2.1.0.yaml"
   - "testing-ns.yaml"
   - "default-ns.yaml"
