@@ -1,5 +1,0 @@
-resources:
-  - "k6-release-v0.0.9.yml"
-
-patchesStrategicMerge:
-  - "k6-release-patch.yml"
