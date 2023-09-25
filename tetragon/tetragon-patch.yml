@@ -45,9 +45,10 @@ spec:
       containers:
       - name: export-stdout
       - name: tetragon
-        requests:
-          cpu: "100m"
-          memory: "100Mi"
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "100Mi"
       nodeSelector:
         kubernetes.io/os: "linux"
       tolerations:
