@@ -1,5 +1,5 @@
 resources:
-  - "trivy-operator-v0.16.0.yml"
+  - "trivy-operator-v0.16.1.yml"
 
 patchesStrategicMerge:
   - "trivy-operator-patch.yml"
