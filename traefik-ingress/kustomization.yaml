@@ -1,4 +1,9 @@
 namespace: "kube-system"
+
 resources:
   - "kubernetes-crd-definition-v1.yml"
   - "ingress-traefik-v2.10.4.yaml"
+
+labels:
+  - pairs:
+      app.kubernetes.io/managed-by: "kustomize"

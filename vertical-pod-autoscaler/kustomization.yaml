@@ -15,3 +15,7 @@ secretGenerator:
       - "certs/caCert.pem"
       - "certs/serverKey.pem"
       - "certs/serverCert.pem"
+
+labels:
+  - pairs:
+      app.kubernetes.io/managed-by: "kustomize"

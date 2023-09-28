@@ -3,3 +3,7 @@ resources:
 
 patchesStrategicMerge:
   - "ingress-nginx-patch.yaml"
+
+labels:
+  - pairs:
+      app.kubernetes.io/managed-by: "kustomize"

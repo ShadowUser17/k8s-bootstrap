@@ -3,3 +3,7 @@ resources:
 
 patchesStrategicMerge:
   - "trivy-operator-patch.yml"
+
+labels:
+  - pairs:
+      app.kubernetes.io/managed-by: "kustomize"

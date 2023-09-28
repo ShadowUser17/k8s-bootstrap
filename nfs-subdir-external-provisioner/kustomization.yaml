@@ -6,3 +6,7 @@ resources:
 
 patchesStrategicMerge:
   - "patch.yaml"
+
+labels:
+  - pairs:
+      app.kubernetes.io/managed-by: "kustomize"
