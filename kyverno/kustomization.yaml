@@ -1,9 +1,7 @@
-resources:
-  - "kyverno-v1.10.3.yml"
-
-patchesStrategicMerge:
-  - "kyverno-patch.yaml"
-
+apiVersion: "kustomize.config.k8s.io/v1beta1"
+kind: "Kustomization"
+resources: ["kyverno-v1.10.3.yml"]
+patchesStrategicMerge: ["kyverno-patch.yaml"]
 labels:
   - pairs:
       app.kubernetes.io/managed-by: "kustomize"

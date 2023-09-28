@@ -1,9 +1,7 @@
-resources:
-  - "tetragon-v0.11.0.yml"
-
-patchesStrategicMerge:
-  - "tetragon-patch.yml"
-
+apiVersion: "kustomize.config.k8s.io/v1beta1"
+kind: "Kustomization"
+resources: ["tetragon-v0.11.0.yml"]
+patchesStrategicMerge: ["tetragon-patch.yml"]
 labels:
   - pairs:
       app.kubernetes.io/managed-by: "kustomize"

@@ -1,9 +1,7 @@
-resources:
-  - "trivy-operator-v0.16.1.yml"
-
-patchesStrategicMerge:
-  - "trivy-operator-patch.yml"
-
+apiVersion: "kustomize.config.k8s.io/v1beta1"
+kind: "Kustomization"
+resources: ["trivy-operator-v0.16.1.yml"]
+patchesStrategicMerge: ["trivy-operator-patch.yml"]
 labels:
   - pairs:
       app.kubernetes.io/managed-by: "kustomize"
