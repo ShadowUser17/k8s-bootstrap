@@ -16,3 +16,17 @@ spec:
       memory: "512Mi"
     defaultRequest:
       memory: "128Mi"
+
+---
+apiVersion: "v1"
+kind: "LimitRange"
+metadata:
+  namespace: "default"
+  name: "memory-limit"
+spec:
+  limits:
+  - type: "Container"
+    default:
+      memory: "512Mi"
+    defaultRequest:
+      memory: "128Mi"
