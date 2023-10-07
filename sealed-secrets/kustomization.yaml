@@ -1,6 +1,0 @@
-apiVersion: "kustomize.config.k8s.io/v1beta1"
-kind: "Kustomization"
-resources: ["sealed-secrets-v0.24.1.yml"]
-labels:
-  - pairs:
-      app.kubernetes.io/managed-by: "kustomize"
