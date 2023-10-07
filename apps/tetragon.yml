@@ -5,6 +5,7 @@ metadata:
   namespace: "flux-system"
 spec:
   interval: "5m"
+  releaseName: "tetragon"
   targetNamespace: "kube-system"
   chart:
     spec:

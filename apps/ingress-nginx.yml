@@ -11,6 +11,7 @@ metadata:
   namespace: "flux-system"
 spec:
   interval: "5m"
+  releaseName: "ingress-nginx"
   targetNamespace: "ingress-nginx"
   chart:
     spec:

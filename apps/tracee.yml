@@ -11,6 +11,7 @@ metadata:
   namespace: "flux-system"
 spec:
   interval: "5m"
+  releaseName: "tracee"
   targetNamespace: "tracee-system"
   chart:
     spec:

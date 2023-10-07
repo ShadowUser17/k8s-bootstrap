@@ -5,7 +5,8 @@ metadata:
   namespace: "flux-system"
 spec:
   interval: "5m"
-  targetNamespace: "kyverno-policies"
+  releaseName: "kyverno-policies"
+  targetNamespace: "kyverno"
   chart:
     spec:
       chart: "kyverno-policies"
