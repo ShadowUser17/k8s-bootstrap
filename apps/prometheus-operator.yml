@@ -18,10 +18,7 @@ spec:
     alertmanager:
       enabled: true
       ingress:
-        enabled: true
-        path: "/"
-        hosts: ["alertmanager.k3s"]
-        ingressClassName: "nginx"
+        enabled: false
       alertmanagerSpec:
         retention: "8h"
         resources:
@@ -49,10 +46,7 @@ spec:
       thanosService:
         enabled: false
       ingress:
-        enabled: true
-        path: "/"
-        hosts: ["prometheus.k3s"]
-        ingressClassName: "nginx"
+        enabled: false
       prometheusSpec:
         retention: "7d"
         resources:
@@ -89,10 +83,7 @@ spec:
           cpu: "50m"
           memory: "250Mi"
       ingress:
-        enabled: true
-        path: "/"
-        hosts: ["grafana.k3s"]
-        ingressClassName: "nginx"
+        enabled: false
       persistence:
         enabled: true
         type: "pvc"
