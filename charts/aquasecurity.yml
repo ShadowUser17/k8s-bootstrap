@@ -4,4 +4,4 @@ metadata:
   name: "aquasecurity"
 spec:
   url: "https://aquasecurity.github.io/helm-charts"
-  interval: "5m"
+  interval: "1h"

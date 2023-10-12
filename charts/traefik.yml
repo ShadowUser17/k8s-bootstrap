@@ -4,4 +4,4 @@ metadata:
   name: "traefik"
 spec:
   url: "https://traefik.github.io/charts"
-  interval: "5m"
+  interval: "1h"

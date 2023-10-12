@@ -4,4 +4,4 @@ metadata:
   name: "cilium"
 spec:
   url: "https://helm.cilium.io"
-  interval: "5m"
+  interval: "1h"

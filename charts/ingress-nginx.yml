@@ -4,4 +4,4 @@ metadata:
   name: "ingress-nginx"
 spec:
   url: "https://kubernetes.github.io/ingress-nginx"
-  interval: "5m"
+  interval: "1h"

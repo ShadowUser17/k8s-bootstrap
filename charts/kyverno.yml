@@ -4,4 +4,4 @@ metadata:
   name: "kyverno"
 spec:
   url: "https://kyverno.github.io/kyverno"
-  interval: "5m"
+  interval: "1h"
