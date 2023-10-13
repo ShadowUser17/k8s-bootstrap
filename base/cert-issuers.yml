@@ -1,0 +1,16 @@
+apiVersion: "cert-manager.io/v1"
+kind: "Issuer"
+metadata:
+  name: "testing-issuer"
+  namespace: "testing"
+spec:
+  selfSigned: {}
+
+---
+apiVersion: "cert-manager.io/v1"
+kind: "Issuer"
+metadata:
+  name: "monitoring-issuer"
+  namespace: "monitoring"
+spec:
+  selfSigned: {}
