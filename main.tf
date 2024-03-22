@@ -27,6 +27,12 @@ provider "kubernetes" {
 /*
     Deploy base components:
 */
+resource "kubernetes_namespace" "testing-ns" {
+    metadata {
+        name = "testing"
+    }
+}
+
 resource "helm_release" "cert-manager" {
     repository = "https://charts.jetstack.io"
     chart = "cert-manager"
@@ -113,5 +119,19 @@ resource "kubectl_manifest" "cert-manager-monitor" {
 
 resource "kubectl_manifest" "ingress-nginx-monitor" {
     yaml_body = "${file("./monitoring/ingress-nginx.yml")}"
+    depends_on = [helm_release.kube-prometheus-stack]
+}
+
+/*
+    Deploy storage components:
+*/
+resource "helm_release" "minio" {
+    repository = "https://charts.bitnami.com/bitnami"
+    chart = "minio"
+    values = ["${file("./values/minio.yml")}"]
+    name = "s3"
+    version = "14.1.1"
+    namespace = "${kubernetes_namespace.testing-ns.id}"
+    create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
 }

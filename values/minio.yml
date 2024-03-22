@@ -1,0 +1,50 @@
+mode: "standalone"
+
+# Only in standalone mode!
+defaultBuckets: "backups"
+
+image:
+  registry: "docker.io"
+  repository: "bitnami/minio"
+  tag: "latest"
+  pullPolicy: "Always"
+
+auth:
+  rootUser: "testing"
+  rootPassword: "1qaz!QAZ"
+
+resources:
+  requests:
+    memory: "512Mi"
+  limits:
+    memory: "512Mi"
+
+persistence:
+  enabled: true
+  size: "8Gi"
+  accessModes: ["ReadWriteOnce"]
+  storageClass: "local-path"
+
+networkPolicy:
+  enabled: true
+  allowExternal: true
+
+ingress:
+  enabled: true
+  hostname: "minio.k3s"
+  ingressClassName: "nginx"
+
+apiIngress:
+  enabled: true
+  hostname: "minio-api.k3s"
+  ingressClassName: "nginx"
+
+nodeSelector:
+  kubernetes.io/os: "linux"
+
+metrics:
+  serviceMonitor:
+    enabled: true
+    interval: "30s"
+    labels:
+      release: "prom-operator"
