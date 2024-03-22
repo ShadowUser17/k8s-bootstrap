@@ -69,3 +69,23 @@ resource "helm_release" "kube-prometheus-stack" {
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
 }
+
+resource "helm_release" "loki" {
+    repository = "https://grafana.github.io/helm-charts"
+    chart = "loki"
+    values = ["${file("./values/loki.yml")}"]
+    name = "loki"
+    version = "5.43.7"
+    namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
+    create_namespace = false
+}
+
+resource "helm_release" "promtail" {
+    repository = "https://grafana.github.io/helm-charts"
+    chart = "promtail"
+    values = ["${file("./values/promtail.yml")}"]
+    name = "promtail"
+    version = "6.15.5"
+    namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
+    create_namespace = false
+}
