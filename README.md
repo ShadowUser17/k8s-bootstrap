@@ -1,9 +1,16 @@
 #### App deployments for my testing cluster.
 
-#### Deploy:
+#### Install providers:
 ```bash
 terraform init
 ```
+
+#### Check Helm updates:
+```bash
+nova find --helm --format=table
+```
+
+#### Deploy changes to cluster:
 ```bash
 terraform plan
 ```
