@@ -1,0 +1,110 @@
+alertmanager:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts: ["alertmanager.k3s"]
+    ingressClassName: "nginx"
+  alertmanagerSpec:
+    retention: "8h"
+    image:
+      registry: "quay.io"
+      repository: "prometheus/alertmanager"
+      tag: "v0.27.0"
+    alertmanagerConfigSelector:
+      matchLabels:
+        release: "prom-operator"
+    alertmanagerConfigMatcherStrategy:
+      type: "None"
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          storageClassName: "local-path"
+          resources:
+            requests:
+              storage: "512Mi"
+
+prometheus:
+  enabled: true
+  ingress:
+    enabled: true
+    hosts: ["prometheus.k3s"]
+    ingressClassName: "nginx"
+  prometheusSpec:
+    retention: "7d"
+    image:
+      registry: "quay.io"
+      repository: "prometheus/prometheus"
+      tag: "v2.51.0"
+    resources:
+      requests:
+        memory: "850Mi"
+      limits:
+        memory: "850Mi"
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          storageClassName: "local-path"
+          resources:
+            requests:
+              storage: "8Gi"
+
+# Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+grafana:
+  enabled: true
+  adminPassword: "prom-operator"
+  assertNoLeakedSecrets: false
+  image:
+    registry: "docker.io"
+    repository: "grafana/grafana"
+    tag: "10.1.8"
+  additionalDataSources:
+    - name: "Loki"
+      type: "loki"
+      access: "proxy"
+      url: "http://loki.monitoring.svc:3100"
+      jsonData:
+        timeout: 300
+        maxLines: 2000
+  ingress:
+    enabled: true
+    hosts: ["grafana.k3s"]
+    ingressClassName: "nginx"
+    annotations:
+      cert-manager.io/cluster-issuer: "k8s-cluster-issuer"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    tls:
+      - secretName: "prom-grafana-tls"
+        hosts: ["grafana.k3s"]
+  persistence:
+    enabled: true
+    type: "sts"
+    size: "1Gi"
+    accessModes: ["ReadWriteOnce"]
+    storageClassName: "local-path"
+
+# Using default values from https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-state-metrics/values.yaml
+kube-state-metrics:
+  image:
+    registry: "registry.k8s.io"
+    repository: "kube-state-metrics/kube-state-metrics"
+    tag: "v2.11.0"
+
+# Using default values from https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-node-exporter/values.yaml
+prometheus-node-exporter:
+  image:
+    registry: "quay.io"
+    repository: "prometheus/node-exporter"
+    tag: "v1.7.0"
+
+defaultRules:
+  create: true
+  rules:
+    kubeProxy: false
+    windows: false
+    etcd: false
+    kubeControllerManager: false
+    kubeSchedulerAlerting: false
+    kubeSchedulerRecording: false
+    kubePrometheusNodeRecording: false

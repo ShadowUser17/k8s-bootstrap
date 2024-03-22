@@ -1,6 +1,8 @@
 terraform {
     required_providers {
         helm = "2.12.1"
+        kubernetes = "2.27.0"
+
         kubectl = {
             source = "gavinbunney/kubectl"
             version = "1.14.0"
@@ -18,6 +20,13 @@ provider "kubectl" {
     load_config_file = true
 }
 
+provider "kubernetes" {
+    config_path = "~/.kube/config"
+}
+
+/*
+    Deploy base components:
+*/
 resource "helm_release" "cert-manager" {
     repository = "https://charts.jetstack.io"
     chart = "cert-manager"
@@ -40,4 +49,23 @@ resource "helm_release" "nginx-ingress" {
     version = "4.10.0"
     namespace = "ingress-nginx"
     create_namespace = true
+}
+
+/*
+    Deploy monitoring stack:
+*/
+resource "kubernetes_namespace" "monitoring-stack-ns" {
+    metadata {
+        name = "monitoring"
+    }
+}
+
+resource "helm_release" "kube-prometheus-stack" {
+    repository = "https://prometheus-community.github.io/helm-charts"
+    chart = "kube-prometheus-stack"
+    values = ["${file("./values/prometheus-operator.yml")}"]
+    name = "prom-operator"
+    version = "57.1.0"
+    namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
+    create_namespace = false
 }
