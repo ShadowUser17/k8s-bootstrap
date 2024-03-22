@@ -99,3 +99,11 @@ resource "helm_release" "event-exporter" {
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
 }
+
+resource "kubectl_manifest" "cert-manager-monitor" {
+    yaml_body = "${file("./monitoring/cert-manager.yml")}"
+}
+
+resource "kubectl_manifest" "ingress-nginx-monitor" {
+    yaml_body = "${file("./monitoring/ingress-nginx.yml")}"
+}
