@@ -39,6 +39,7 @@ resource "helm_release" "cert-manager" {
 
 resource "kubectl_manifest" "cluster-issuer" {
     yaml_body = "${file("./values/cluster-issuer.yml")}"
+    depends_on = [helm_release.cert-manager]
 }
 
 resource "helm_release" "nginx-ingress" {
@@ -49,6 +50,7 @@ resource "helm_release" "nginx-ingress" {
     version = "4.10.0"
     namespace = "ingress-nginx"
     create_namespace = true
+    depends_on = [helm_release.cert-manager]
 }
 
 /*
@@ -68,6 +70,7 @@ resource "helm_release" "kube-prometheus-stack" {
     version = "57.1.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
+    depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
 }
 
 resource "helm_release" "loki" {
@@ -78,6 +81,7 @@ resource "helm_release" "loki" {
     version = "5.43.7"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
+    depends_on = [helm_release.kube-prometheus-stack]
 }
 
 resource "helm_release" "promtail" {
@@ -88,6 +92,7 @@ resource "helm_release" "promtail" {
     version = "6.15.5"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
+    depends_on = [helm_release.loki]
 }
 
 resource "helm_release" "event-exporter" {
@@ -98,12 +103,15 @@ resource "helm_release" "event-exporter" {
     version = "3.0.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
+    depends_on = [helm_release.loki]
 }
 
 resource "kubectl_manifest" "cert-manager-monitor" {
     yaml_body = "${file("./monitoring/cert-manager.yml")}"
+    depends_on = [helm_release.kube-prometheus-stack]
 }
 
 resource "kubectl_manifest" "ingress-nginx-monitor" {
     yaml_body = "${file("./monitoring/ingress-nginx.yml")}"
+    depends_on = [helm_release.kube-prometheus-stack]
 }
