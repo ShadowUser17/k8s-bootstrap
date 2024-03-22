@@ -89,3 +89,13 @@ resource "helm_release" "promtail" {
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
 }
+
+resource "helm_release" "event-exporter" {
+    repository = "https://charts.bitnami.com/bitnami"
+    chart = "kubernetes-event-exporter"
+    values = ["${file("./values/event-exporter.yml")}"]
+    name = "event-exporter"
+    version = "3.0.0"
+    namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
+    create_namespace = false
+}
