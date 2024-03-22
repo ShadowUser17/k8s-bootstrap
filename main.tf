@@ -1,3 +1,9 @@
+terraform {
+    required_providers {
+        helm = "2.12.1"
+    }
+}
+
 provider "helm" {
     kubernetes {
         config_path = "~/.kube/config"

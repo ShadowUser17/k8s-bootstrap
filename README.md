@@ -14,3 +14,4 @@ terraform apply
 #### URLs:
 - [helm-provider](https://registry.terraform.io/providers/hashicorp/helm/latest/docs)
 - [kubectl-provider](https://registry.terraform.io/providers/gavinbunney/kubectl/latest/docs)
+- [kubernetes-provider](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs)
