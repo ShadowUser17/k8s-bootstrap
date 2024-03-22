@@ -1,0 +1,16 @@
+controller:
+  replicaCount: 1
+  allowSnippetAnnotations: true
+  ingressClassResource:
+    default: false
+  admissionWebhooks:
+    certManager:
+      enabled: true
+  podAnnotations:
+    promtail.io/collect: "true"
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
