@@ -1,6 +1,10 @@
 terraform {
     required_providers {
         helm = "2.12.1"
+        kubectl = {
+            source = "gavinbunney/kubectl"
+            version = "1.14.0"
+        }
     }
 }
 
@@ -8,6 +12,10 @@ provider "helm" {
     kubernetes {
         config_path = "~/.kube/config"
     }
+}
+
+provider "kubectl" {
+    load_config_file = true
 }
 
 resource "helm_release" "cert-manager" {
@@ -18,6 +26,10 @@ resource "helm_release" "cert-manager" {
     version = "v1.14.4"
     namespace = "cert-manager"
     create_namespace = true
+}
+
+resource "kubectl_manifest" "cluster-issuer" {
+    yaml_body = "${file("./values/cluster-issuer.yml")}"
 }
 
 resource "helm_release" "nginx-ingress" {
