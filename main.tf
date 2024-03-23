@@ -79,6 +79,17 @@ resource "helm_release" "kube-prometheus-stack" {
     depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
 }
 
+resource "helm_release" "blackbox-exporter" {
+    repository = "https://prometheus-community.github.io/helm-charts"
+    chart = "prometheus-blackbox-exporter"
+    values = ["${file("./values/blackbox-exporter.yml")}"]
+    name = "prober"
+    version = "8.12.0"
+    namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
+    create_namespace = false
+    depends_on = [helm_release.kube-prometheus-stack]
+}
+
 resource "helm_release" "loki" {
     repository = "https://grafana.github.io/helm-charts"
     chart = "loki"
