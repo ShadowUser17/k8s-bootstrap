@@ -90,6 +90,17 @@ resource "helm_release" "blackbox-exporter" {
     depends_on = [helm_release.kube-prometheus-stack]
 }
 
+resource "helm_release" "snmp-exporter" {
+    repository = "https://prometheus-community.github.io/helm-charts"
+    chart = "prometheus-snmp-exporter"
+    values = ["${file("./values/snmp-exporter.yml")}"]
+    name = "snmp"
+    version = "5.1.0"
+    namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
+    create_namespace = false
+    depends_on = [helm_release.kube-prometheus-stack]
+}
+
 resource "helm_release" "loki" {
     repository = "https://grafana.github.io/helm-charts"
     chart = "loki"
