@@ -157,3 +157,17 @@ resource "helm_release" "minio" {
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
 }
+
+/*
+    Deploy security components:
+*/
+resource "helm_release" "tetragon" {
+    repository = "https://helm.cilium.io"
+    chart = "tetragon"
+    values = ["${file("./values/tetragon.yml")}"]
+    name = "tetragon"
+    version = "1.0.2"
+    namespace = "kube-system"
+    create_namespace = false
+    depends_on = [helm_release.kube-prometheus-stack]
+}
