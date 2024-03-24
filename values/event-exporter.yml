@@ -9,8 +9,6 @@ image:
 resources:
   requests:
     memory: "64Mi"
-  limits:
-    memory: "64Mi"
 
 metrics:
   enabled: true
