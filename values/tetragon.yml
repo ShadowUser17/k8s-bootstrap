@@ -1,20 +1,41 @@
-podAnnotations:
-  promtail.io/collect: "true"
-  prometheus.io/scrape: "true"
-  prometheus.io/port: "2112"
-
-nodeSelector:
-  kubernetes.io/os: "linux"
-
-tolerations:
-  - operator: "Exists"
-
-tetragon:
-  enableProcessCred: true
-  enableProcessNs: true
+tetragonOperator:
+  enabled: true
+  image:
+    repository: "quay.io/cilium/tetragon-operator"
+    tag: "v1.0.2"
   prometheus:
     enabled: true
     serviceMonitor:
       enabled: true
       labelsOverride:
         release: "prom-operator"
+
+tetragon:
+  enabled: true
+  enableProcessNs: true
+  enableProcessCred: true
+  image:
+    repository: "quay.io/cilium/tetragon"
+    tag: "v1.0.2"
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      labelsOverride:
+        release: "prom-operator"
+
+# Tetragon event settings:
+export:
+  stdout:
+    image:
+      repository: "quay.io/cilium/hubble-export-stdout"
+      tag: "v1.0.4"
+
+podAnnotations:
+  promtail.io/collect: "true"
+
+nodeSelector:
+  kubernetes.io/os: "linux"
+
+tolerations:
+  - operator: "Exists"
