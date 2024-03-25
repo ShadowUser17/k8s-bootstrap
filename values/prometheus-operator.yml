@@ -32,6 +32,9 @@ prometheus:
     ingressClassName: "nginx"
   prometheusSpec:
     retention: "7d"
+    podMetadata:
+      annotations:
+        promtail.io/collect: "true"
     image:
       registry: "quay.io"
       repository: "prometheus/prometheus"
