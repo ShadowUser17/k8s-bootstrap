@@ -106,7 +106,7 @@ resource "helm_release" "loki" {
     chart = "loki"
     values = ["${file("./values/loki.yml")}"]
     name = "loki"
-    version = "5.47.1"
+    version = "5.47.2"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
