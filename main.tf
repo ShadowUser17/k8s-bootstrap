@@ -43,6 +43,10 @@ resource "helm_release" "cert-manager" {
     create_namespace = true
 }
 
+output "cert-manager_version" {
+    value = helm_release.cert-manager.version
+}
+
 resource "kubectl_manifest" "cluster-issuer" {
     yaml_body = "${file("./values/cluster-issuer.yml")}"
     depends_on = [helm_release.cert-manager]
@@ -57,6 +61,10 @@ resource "helm_release" "nginx-ingress" {
     namespace = "ingress-nginx"
     create_namespace = true
     depends_on = [helm_release.cert-manager]
+}
+
+output "nginx-ingress_version" {
+    value = helm_release.nginx-ingress.version
 }
 
 /*
@@ -79,6 +87,10 @@ resource "helm_release" "kube-prometheus-stack" {
     depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
 }
 
+output "kube-prometheus-stack_version" {
+    value = helm_release.kube-prometheus-stack.version
+}
+
 resource "helm_release" "blackbox-exporter" {
     repository = "https://prometheus-community.github.io/helm-charts"
     chart = "prometheus-blackbox-exporter"
@@ -88,6 +100,10 @@ resource "helm_release" "blackbox-exporter" {
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
+}
+
+output "blackbox-exporter_version" {
+    value = helm_release.blackbox-exporter.version
 }
 
 resource "helm_release" "snmp-exporter" {
@@ -101,6 +117,10 @@ resource "helm_release" "snmp-exporter" {
     depends_on = [helm_release.kube-prometheus-stack]
 }
 
+output "snmp-exporter_version" {
+    value = helm_release.snmp-exporter.version
+}
+
 resource "helm_release" "loki" {
     repository = "https://grafana.github.io/helm-charts"
     chart = "loki"
@@ -110,6 +130,10 @@ resource "helm_release" "loki" {
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
+}
+
+output "loki_version" {
+    value = helm_release.loki.version
 }
 
 resource "helm_release" "promtail" {
@@ -123,6 +147,10 @@ resource "helm_release" "promtail" {
     depends_on = [helm_release.loki]
 }
 
+output "promtail_version" {
+    value = helm_release.promtail.version
+}
+
 resource "helm_release" "event-exporter" {
     repository = "https://charts.bitnami.com/bitnami"
     chart = "kubernetes-event-exporter"
@@ -132,6 +160,10 @@ resource "helm_release" "event-exporter" {
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.loki]
+}
+
+output "event-exporter_version" {
+    value = helm_release.event-exporter.version
 }
 
 resource "kubectl_manifest" "cert-manager-monitor" {
@@ -158,6 +190,10 @@ resource "helm_release" "minio" {
     depends_on = [helm_release.kube-prometheus-stack]
 }
 
+output "minio_version" {
+    value = helm_release.minio.version
+}
+
 /*
     Deploy security components:
 */
@@ -170,4 +206,8 @@ resource "helm_release" "tetragon" {
     namespace = "kube-system"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
+}
+
+output "tetragon_version" {
+    value = helm_release.tetragon.version
 }

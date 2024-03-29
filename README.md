@@ -10,6 +10,11 @@ terraform init
 nova find --helm --format=table
 ```
 
+#### Show deployed versions:
+```bash
+terraform output
+```
+
 #### Deploy changes to cluster:
 ```bash
 terraform plan
