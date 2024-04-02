@@ -94,7 +94,9 @@ kube-state-metrics:
     repository: "kube-state-metrics/kube-state-metrics"
     tag: "v2.11.0"
   metricLabelsAllowlist:
-    - 'nodes=[*]'
+    - 'nodes=[node.kubernetes.io/instance-type,node-role.kubernetes.io/control-plane,node-role.kubernetes.io/master]'
+    - 'pods=[app.kubernetes.io/name]'
+    - 'ingresses=[app.kubernetes.io/name]'
 
 # Using default values from https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-node-exporter/values.yaml
 prometheus-node-exporter:
