@@ -92,7 +92,7 @@ kube-state-metrics:
   image:
     registry: "registry.k8s.io"
     repository: "kube-state-metrics/kube-state-metrics"
-    tag: "v2.11.0"
+    tag: "v2.12.0"
   metricLabelsAllowlist:
     - 'nodes=[node.kubernetes.io/instance-type,node-role.kubernetes.io/control-plane,node-role.kubernetes.io/master]'
     - 'pods=[app.kubernetes.io/name]'
