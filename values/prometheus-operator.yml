@@ -1,3 +1,12 @@
+prometheusOperator:
+  enabled: true
+  admissionWebhooks:
+    certManager:
+      enabled: true
+      issuerRef:
+        name: "k8s-cluster-issuer"
+        kind: "ClusterIssuer"
+
 alertmanager:
   enabled: true
   ingress:
