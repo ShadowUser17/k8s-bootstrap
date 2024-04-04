@@ -211,3 +211,18 @@ resource "helm_release" "tetragon" {
 output "tetragon_version" {
     value = helm_release.tetragon.version
 }
+
+/*resource "helm_release" "trivy-operator" {
+    repository = "https://aquasecurity.github.io/helm-charts"
+    chart = "trivy-operator"
+    values = ["${file("./values/trivy-operator.yml")}"]
+    name = "trivy-operator"
+    version = "0.21.4"
+    namespace = "trivy-system"
+    create_namespace = true
+    depends_on = [helm_release.kube-prometheus-stack]
+}
+
+output "trivy-operator_version" {
+    value = helm_release.trivy-operator.version
+}*/

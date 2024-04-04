@@ -1,0 +1,15 @@
+trivyOperator:
+  scanJobTolerations:
+    - operator: "Exists"
+  scanJobNodeSelector:
+    kubernetes.io/os: "linux"
+
+service:
+  metricsPort: 8080
+  annotations:
+    prometheus.io/scrape: "true"
+
+serviceMonitor:
+  enabled: true
+  labels:
+    release: "prom-operator"
