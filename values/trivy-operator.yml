@@ -29,6 +29,6 @@ service:
 
 serviceMonitor:
   enabled: true
-  interval: "30s"
+  interval: "1m"
   labels:
     release: "prom-operator"

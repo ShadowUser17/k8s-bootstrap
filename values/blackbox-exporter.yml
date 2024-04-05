@@ -1,6 +1,7 @@
 serviceMonitor:
   selfMonitor:
     enabled: true
+    interval: "1m"
     labels:
       release: "prom-operator"
 
