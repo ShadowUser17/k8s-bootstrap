@@ -212,7 +212,7 @@ output "tetragon_version" {
     value = helm_release.tetragon.version
 }
 
-/*resource "helm_release" "trivy-operator" {
+resource "helm_release" "trivy-operator" {
     repository = "https://aquasecurity.github.io/helm-charts"
     chart = "trivy-operator"
     values = ["${file("./values/trivy-operator.yml")}"]
@@ -225,4 +225,4 @@ output "tetragon_version" {
 
 output "trivy-operator_version" {
     value = helm_release.trivy-operator.version
-}*/
+}
