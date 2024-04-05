@@ -1,3 +1,21 @@
+operator:
+  replicas: 1
+  scanJobsConcurrentLimit: 4
+  clusterComplianceEnabled: true
+  configAuditScannerEnabled: true
+  vulnerabilityScannerEnabled: true
+  rbacAssessmentScannerEnabled: true
+  infraAssessmentScannerEnabled: true
+
+trivy:
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "128M"
+    limits:
+      cpu: "200m"
+      memory: "512M"
+
 trivyOperator:
   scanJobTolerations:
     - operator: "Exists"
@@ -11,5 +29,6 @@ service:
 
 serviceMonitor:
   enabled: true
+  interval: "30s"
   labels:
     release: "prom-operator"
