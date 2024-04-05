@@ -1,5 +1,7 @@
 prometheusOperator:
   enabled: true
+  serviceMonitor:
+    interval: "1m"
   admissionWebhooks:
     certManager:
       enabled: true
@@ -13,6 +15,8 @@ alertmanager:
     enabled: true
     hosts: ["alertmanager.k3s"]
     ingressClassName: "nginx"
+  serviceMonitor:
+    interval: "1m"
   alertmanagerSpec:
     retention: "8h"
     image:
@@ -39,6 +43,8 @@ prometheus:
     enabled: true
     hosts: ["prometheus.k3s"]
     ingressClassName: "nginx"
+  serviceMonitor:
+    interval: "1m"
   prometheusSpec:
     retention: "7d"
     podMetadata:
@@ -79,6 +85,8 @@ grafana:
       jsonData:
         timeout: 300
         maxLines: 2000
+  serviceMonitor:
+    interval: "1m"
   ingress:
     enabled: true
     hosts: ["grafana.k3s"]
@@ -102,6 +110,9 @@ kube-state-metrics:
     registry: "registry.k8s.io"
     repository: "kube-state-metrics/kube-state-metrics"
     tag: "v2.12.0"
+  prometheus:
+    monitor:
+      interval: "30s"
   metricLabelsAllowlist:
     - 'nodes=[node.kubernetes.io/instance-type,node-role.kubernetes.io/control-plane,node-role.kubernetes.io/master]'
     - 'pods=[app.kubernetes.io/name]'
@@ -113,6 +124,41 @@ prometheus-node-exporter:
     registry: "quay.io"
     repository: "prometheus/node-exporter"
     tag: "v1.7.0"
+  prometheus:
+    monitor:
+      interval: "30s"
+
+coreDns:
+  serviceMonitor:
+    interval: "1m"
+
+kubelet:
+  serviceMonitor:
+    interval: "30s"
+
+kubeApiServer:
+  serviceMonitor:
+    interval: "30s"
+
+kubeControllerManager:
+  enabled: false
+  serviceMonitor:
+    interval: "30s"
+
+kubeScheduler:
+  enabled: false
+  serviceMonitor:
+    interval: "30s"
+
+kubeProxy:
+  enabled: false
+  serviceMonitor:
+    interval: "30s"
+
+kubeEtcd:
+  enabled: false
+  serviceMonitor:
+    interval: "30s"
 
 defaultRules:
   create: true
@@ -123,4 +169,3 @@ defaultRules:
     kubeControllerManager: false
     kubeSchedulerAlerting: false
     kubeSchedulerRecording: false
-    kubePrometheusNodeRecording: false
