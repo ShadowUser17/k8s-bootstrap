@@ -156,7 +156,7 @@ resource "helm_release" "event-exporter" {
     chart = "kubernetes-event-exporter"
     values = ["${file("./values/event-exporter.yml")}"]
     name = "event-exporter"
-    version = "3.0.0"
+    version = "3.0.2"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.loki]
