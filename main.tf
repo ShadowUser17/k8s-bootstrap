@@ -184,7 +184,7 @@ resource "helm_release" "minio" {
     chart = "minio"
     values = ["${file("./values/minio.yml")}"]
     name = "s3"
-    version = "14.1.6"
+    version = "14.1.7"
     namespace = "${kubernetes_namespace.testing-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
