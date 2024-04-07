@@ -4,6 +4,9 @@
 ```bash
 terraform init
 ```
+```bash
+terraform init -upgrade
+```
 
 #### Check Helm updates:
 ```bash
