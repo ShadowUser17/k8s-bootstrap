@@ -111,7 +111,7 @@ resource "helm_release" "blackbox-exporter" {
     chart = "prometheus-blackbox-exporter"
     values = ["${file("./values/blackbox-exporter.yml")}"]
     name = "prober"
-    version = "8.13.0"
+    version = "8.14.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
