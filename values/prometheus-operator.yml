@@ -1,5 +1,14 @@
 prometheusOperator:
   enabled: true
+  image:
+    registry: "quay.io"
+    repository: "prometheus-operator/prometheus-operator"
+    tag: "v0.73.2"
+  prometheusConfigReloader:
+    image:
+      registry: "quay.io"
+      repository: "prometheus-operator/prometheus-config-reloader"
+      tag: "v0.73.2"
   serviceMonitor:
     interval: "1m"
   admissionWebhooks:
