@@ -38,7 +38,7 @@ resource "helm_release" "cert-manager" {
     chart = "cert-manager"
     values = ["${file("./values/cert-manager.yml")}"]
     name = "cert-manager"
-    version = "v1.14.4"
+    version = "v1.14.5"
     namespace = "cert-manager"
     create_namespace = true
 }
