@@ -126,7 +126,7 @@ resource "helm_release" "snmp-exporter" {
     chart = "prometheus-snmp-exporter"
     values = ["${file("./values/snmp-exporter.yml")}"]
     name = "snmp"
-    version = "5.2.0"
+    version = "5.3.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
