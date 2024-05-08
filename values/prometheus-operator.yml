@@ -170,11 +170,4 @@ kubeEtcd:
     interval: "30s"
 
 defaultRules:
-  create: true
-  rules:
-    kubeProxy: false
-    windows: false
-    etcd: false
-    kubeControllerManager: false
-    kubeSchedulerAlerting: false
-    kubeSchedulerRecording: false
+  create: false
