@@ -91,7 +91,7 @@ output "kube-prometheus-stack_version" {
     value = helm_release.kube-prometheus-stack.version
 }
 
-resource "helm_release" "node-problem-detector" {
+/*resource "helm_release" "node-problem-detector" {
     repository = "https://charts.deliveryhero.io"
     chart = "node-problem-detector"
     values = ["${file("./values/node-problem-detector.yml")}"]
@@ -104,7 +104,7 @@ resource "helm_release" "node-problem-detector" {
 
 output "node-problem-detector_version" {
     value = helm_release.node-problem-detector.version
-}
+}*/
 
 resource "helm_release" "blackbox-exporter" {
     repository = "https://prometheus-community.github.io/helm-charts"
