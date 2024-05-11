@@ -1,9 +1,13 @@
-serviceMonitor:
-  enabled: false
+image:
+  repository: "quay.io/prometheus/snmp-exporter"
+  tag: "v0.26.0"
 
 resources:
   requests:
     memory: "64Mi"
+
+serviceMonitor:
+  enabled: false
 
 nodeSelector:
   kubernetes.io/os: "linux"
