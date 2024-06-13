@@ -217,7 +217,7 @@ resource "helm_release" "tetragon" {
     chart = "tetragon"
     values = ["${file("./values/tetragon.yml")}"]
     name = "tetragon"
-    version = "1.1.0"
+    version = "1.1.2"
     namespace = "kube-system"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
