@@ -218,6 +218,19 @@ resource "kubernetes_namespace" "argo-workflows-ns" {
     }
 }
 
+resource "kubectl_manifest" "argo-workflows-sa" {
+    yaml_body = "${file("./roles/argo-workflows-sa.yml")}"
+    depends_on = [kubernetes_namespace.argo-workflows-ns]
+}
+
+resource "kubectl_manifest" "argo-workflows-sa-secret" {
+    yaml_body = "${file("./roles/argo-workflows-sa-secret.yml")}"
+    depends_on = [
+        kubernetes_namespace.argo-workflows-ns,
+        kubectl_manifest.argo-workflows-sa
+    ]
+}
+
 resource "kubectl_manifest" "argo-workflows-secret" {
     yaml_body = "${file("./values/argo-workflows-secret.yml")}"
     depends_on = [kubernetes_namespace.argo-workflows-ns]
