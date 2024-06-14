@@ -212,14 +212,20 @@ output "minio_version" {
 /*
     Deploy CI/CD components:
 */
+resource "kubernetes_namespace" "argo-workflows-ns" {
+    metadata {
+        name = "argo-workflows"
+    }
+}
+
 resource "helm_release" "argo-workflows" {
     repository = "https://argoproj.github.io/argo-helm"
     chart = "argo-workflows"
     values = ["${file("./values/argo-workflows.yml")}"]
     name = "argo-workflows"
     version = "0.41.8"
-    namespace = "argo-workflows"
-    create_namespace = true
+    namespace = "${kubernetes_namespace.argo-workflows-ns.id}"
+    create_namespace = false
     depends_on = [
         helm_release.cert-manager,
         helm_release.nginx-ingress,

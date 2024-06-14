@@ -5,7 +5,6 @@ crds:
 controller:
   resources: {}
   podAnnotations: {}
-  workflowNamespaces: ["argo-workflows-workers"]
   metricsConfig:
     enabled: true
   serviceMonitor:
@@ -33,7 +32,7 @@ server:
   nodeSelector:
     kubernetes.io/os: "linux"
 
-singleNamespace: false
+singleNamespace: true
 useStaticCredentials: true
 
 artifactRepository:
