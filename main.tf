@@ -234,6 +234,7 @@ resource "helm_release" "argo-workflows" {
     depends_on = [
         helm_release.cert-manager,
         helm_release.nginx-ingress,
+        helm_release.kube-prometheus-stack,
         helm_release.minio
     ]
 }

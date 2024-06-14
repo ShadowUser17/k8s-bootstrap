@@ -3,12 +3,12 @@ crds:
   keep: true
 
 controller:
-  resources: {}
-  podAnnotations: {}
+  podAnnotations:
+    promtail.io/collect: "true"
   metricsConfig:
     enabled: true
   serviceMonitor:
-    enabled: false
+    enabled: true
     additionalLabels:
       release: "prom-operator"
   telemetryConfig:
@@ -27,8 +27,6 @@ server:
     tls:
       - hosts: ["argo-workflows.k3s"]
         secretName: "argo-workflows-tls"
-  resources: {}
-  podAnnotations: {}
   nodeSelector:
     kubernetes.io/os: "linux"
 
