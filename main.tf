@@ -210,6 +210,28 @@ output "minio_version" {
 }
 
 /*
+    Deploy CI/CD components:
+*/
+resource "helm_release" "argo-workflows" {
+    repository = "https://argoproj.github.io/argo-helm"
+    chart = "argo-workflows"
+    values = ["${file("./values/argo-workflows.yml")}"]
+    name = "argo-workflows"
+    version = "0.41.8"
+    namespace = "argo-workflows"
+    create_namespace = true
+    depends_on = [
+        helm_release.cert-manager,
+        helm_release.nginx-ingress,
+        helm_release.minio
+    ]
+}
+
+output "argo-workflows_version" {
+    value = helm_release.argo-workflows.version
+}
+
+/*
     Deploy security components:
 */
 resource "helm_release" "tetragon" {

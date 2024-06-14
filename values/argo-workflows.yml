@@ -1,0 +1,50 @@
+crds:
+  install: true
+  keep: true
+
+controller:
+  resources: {}
+  podAnnotations: {}
+  workflowNamespaces: ["argo-workflows-workers"]
+  metricsConfig:
+    enabled: true
+  serviceMonitor:
+    enabled: false
+    additionalLabels:
+      release: "prom-operator"
+  telemetryConfig:
+    enabled: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "k8s-cluster-issuer"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    ingressClassName: "nginx"
+    hosts: ["argo-workflows.k3s"]
+    tls:
+      - hosts: ["argo-workflows.k3s"]
+        secretName: "argo-workflows-tls"
+  resources: {}
+  podAnnotations: {}
+  nodeSelector:
+    kubernetes.io/os: "linux"
+
+singleNamespace: false
+useStaticCredentials: true
+
+artifactRepository:
+  archiveLogs: false
+  s3:
+    endpoint: "http://s3-minio.testing.svc:9000"
+    bucket: "argo-workflows-artifacts"
+    insecure: true
+    accessKeySecret:
+      name: "argo-workflows-minio"
+      key: "accesskey"
+    secretKeySecret:
+      name: "argo-workflows-minio"
+      key: "secretkey"
