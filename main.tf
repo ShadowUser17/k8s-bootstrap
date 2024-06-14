@@ -223,6 +223,11 @@ resource "kubectl_manifest" "argo-workflows-sa" {
     depends_on = [kubernetes_namespace.argo-workflows-ns]
 }
 
+resource "kubectl_manifest" "argo-workflows-role-binding" {
+    yaml_body = "${file("./roles/argo-workflows-role-binding.yml")}"
+    depends_on = [kubectl_manifest.argo-workflows-sa]
+}
+
 resource "kubectl_manifest" "argo-workflows-sa-secret" {
     yaml_body = "${file("./roles/argo-workflows-sa-secret.yml")}"
     depends_on = [
