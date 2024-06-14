@@ -218,6 +218,11 @@ resource "kubernetes_namespace" "argo-workflows-ns" {
     }
 }
 
+resource "kubectl_manifest" "argo-workflows-secret" {
+    yaml_body = "${file("./values/argo-workflows-secret.yml")}"
+    depends_on = [kubernetes_namespace.argo-workflows-ns]
+}
+
 resource "helm_release" "argo-workflows" {
     repository = "https://argoproj.github.io/argo-helm"
     chart = "argo-workflows"

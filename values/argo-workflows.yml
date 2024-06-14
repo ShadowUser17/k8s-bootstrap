@@ -42,8 +42,8 @@ artifactRepository:
     bucket: "argo-workflows-artifacts"
     insecure: true
     accessKeySecret:
-      name: "argo-workflows-minio"
+      name: "argo-workflows-secret"
       key: "accesskey"
     secretKeySecret:
-      name: "argo-workflows-minio"
+      name: "argo-workflows-secret"
       key: "secretkey"
