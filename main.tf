@@ -81,7 +81,7 @@ resource "helm_release" "kube-prometheus-stack" {
     chart = "kube-prometheus-stack"
     values = ["${file("./values/prometheus-operator.yml")}"]
     name = "prom-operator"
-    version = "60.1.0"
+    version = "60.2.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
@@ -171,7 +171,7 @@ resource "helm_release" "event-exporter" {
     chart = "kubernetes-event-exporter"
     values = ["${file("./values/event-exporter.yml")}"]
     name = "event-exporter"
-    version = "3.2.3"
+    version = "3.2.5"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.loki]
@@ -199,7 +199,7 @@ resource "helm_release" "minio" {
     chart = "minio"
     values = ["${file("./values/minio.yml")}"]
     name = "s3"
-    version = "14.6.7"
+    version = "14.6.11"
     namespace = "${kubernetes_namespace.testing-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
