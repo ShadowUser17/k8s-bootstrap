@@ -81,7 +81,7 @@ resource "helm_release" "kube-prometheus-stack" {
     chart = "kube-prometheus-stack"
     values = ["${file("./values/prometheus-operator.yml")}"]
     name = "prom-operator"
-    version = "60.3.0"
+    version = "60.4.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
@@ -199,7 +199,7 @@ resource "helm_release" "minio" {
     chart = "minio"
     values = ["${file("./values/minio.yml")}"]
     name = "s3"
-    version = "14.6.11"
+    version = "14.6.12"
     namespace = "${kubernetes_namespace.testing-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
