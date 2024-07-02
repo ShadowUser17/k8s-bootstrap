@@ -81,7 +81,7 @@ resource "helm_release" "kube-prometheus-stack" {
     chart = "kube-prometheus-stack"
     values = ["${file("./values/prometheus-operator.yml")}"]
     name = "prom-operator"
-    version = "60.4.0"
+    version = "61.1.1"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
@@ -126,7 +126,7 @@ resource "helm_release" "snmp-exporter" {
     chart = "prometheus-snmp-exporter"
     values = ["${file("./values/snmp-exporter.yml")}"]
     name = "snmp"
-    version = "5.4.0"
+    version = "5.5.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
