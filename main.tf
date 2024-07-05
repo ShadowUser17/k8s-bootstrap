@@ -292,7 +292,7 @@ resource "helm_release" "trivy-operator" {
     chart = "trivy-operator"
     values = ["${file("./values/trivy-operator.yml")}"]
     name = "trivy-operator"
-    version = "0.23.3"
+    version = "0.24.0"
     namespace = "trivy-system"
     create_namespace = true
     depends_on = [helm_release.kube-prometheus-stack]
