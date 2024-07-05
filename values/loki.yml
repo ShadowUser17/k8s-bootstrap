@@ -1,6 +1,6 @@
 loki:
   image:
-    tag: "2.9.8"
+    tag: "2.9.9"
     registry: "docker.io"
     repository: "grafana/loki"
   auth_enabled: false

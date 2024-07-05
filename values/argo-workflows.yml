@@ -1,0 +1,47 @@
+crds:
+  install: true
+  keep: true
+
+controller:
+  podAnnotations:
+    promtail.io/collect: "true"
+  metricsConfig:
+    enabled: true
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      release: "prom-operator"
+  telemetryConfig:
+    enabled: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "k8s-cluster-issuer"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    ingressClassName: "nginx"
+    hosts: ["argo-workflows.k3s"]
+    tls:
+      - hosts: ["argo-workflows.k3s"]
+        secretName: "argo-workflows-tls"
+  nodeSelector:
+    kubernetes.io/os: "linux"
+
+singleNamespace: true
+useStaticCredentials: true
+
+artifactRepository:
+  archiveLogs: false
+  s3:
+    endpoint: "http://s3-minio.testing.svc:9000"
+    bucket: "argo-workflows-artifacts"
+    insecure: true
+    accessKeySecret:
+      name: "argo-workflows-secret"
+      key: "accesskey"
+    secretKeySecret:
+      name: "argo-workflows-secret"
+      key: "secretkey"

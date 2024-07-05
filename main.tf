@@ -81,7 +81,7 @@ resource "helm_release" "kube-prometheus-stack" {
     chart = "kube-prometheus-stack"
     values = ["${file("./values/prometheus-operator.yml")}"]
     name = "prom-operator"
-    version = "61.1.1"
+    version = "61.2.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
@@ -171,7 +171,7 @@ resource "helm_release" "event-exporter" {
     chart = "kubernetes-event-exporter"
     values = ["${file("./values/event-exporter.yml")}"]
     name = "event-exporter"
-    version = "3.2.5"
+    version = "3.2.7"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.loki]
@@ -199,7 +199,7 @@ resource "helm_release" "minio" {
     chart = "minio"
     values = ["${file("./values/minio.yml")}"]
     name = "s3"
-    version = "14.6.12"
+    version = "14.6.19"
     namespace = "${kubernetes_namespace.testing-ns.id}"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
@@ -207,6 +207,66 @@ resource "helm_release" "minio" {
 
 output "minio_version" {
     value = helm_release.minio.version
+}
+
+/*
+    Deploy CI/CD components:
+*/
+resource "kubernetes_namespace" "argo-workflows-ns" {
+    metadata {
+        name = "argo-workflows"
+    }
+}
+
+resource "kubectl_manifest" "argo-workflows-sa" {
+    yaml_body = "${file("./roles/argo-workflows-sa.yml")}"
+    depends_on = [kubernetes_namespace.argo-workflows-ns]
+}
+
+resource "kubectl_manifest" "argo-workflows-cluster-role" {
+    yaml_body = "${file("./roles/argo-workflows-cluster-role.yml")}"
+    depends_on = [kubectl_manifest.argo-workflows-sa]
+}
+
+resource "kubectl_manifest" "argo-workflows-role-binding" {
+    yaml_body = "${file("./roles/argo-workflows-role-binding.yml")}"
+    depends_on = [
+        kubectl_manifest.argo-workflows-cluster-role,
+        kubectl_manifest.argo-workflows-sa
+    ]
+}
+
+resource "kubectl_manifest" "argo-workflows-sa-secret" {
+    yaml_body = "${file("./roles/argo-workflows-sa-secret.yml")}"
+    depends_on = [
+        kubernetes_namespace.argo-workflows-ns,
+        kubectl_manifest.argo-workflows-sa
+    ]
+}
+
+resource "kubectl_manifest" "argo-workflows-secret" {
+    yaml_body = "${file("./values/argo-workflows-secret.yml")}"
+    depends_on = [kubernetes_namespace.argo-workflows-ns]
+}
+
+resource "helm_release" "argo-workflows" {
+    repository = "https://argoproj.github.io/argo-helm"
+    chart = "argo-workflows"
+    values = ["${file("./values/argo-workflows.yml")}"]
+    name = "argo-workflows"
+    version = "0.41.11"
+    namespace = "${kubernetes_namespace.argo-workflows-ns.id}"
+    create_namespace = false
+    depends_on = [
+        helm_release.cert-manager,
+        helm_release.nginx-ingress,
+        helm_release.kube-prometheus-stack,
+        helm_release.minio
+    ]
+}
+
+output "argo-workflows_version" {
+    value = helm_release.argo-workflows.version
 }
 
 /*
@@ -232,7 +292,7 @@ resource "helm_release" "trivy-operator" {
     chart = "trivy-operator"
     values = ["${file("./values/trivy-operator.yml")}"]
     name = "trivy-operator"
-    version = "0.23.3"
+    version = "0.24.0"
     namespace = "trivy-system"
     create_namespace = true
     depends_on = [helm_release.kube-prometheus-stack]
