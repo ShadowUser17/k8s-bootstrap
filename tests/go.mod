@@ -2,7 +2,7 @@ module k8s-bootstrap
 
 go 1.21
 
-require github.com/gruntwork-io/terratest v0.46.16
+require github.com/gruntwork-io/terratest v0.47.0
 
 require (
 	cloud.google.com/go v0.110.0 // indirect
