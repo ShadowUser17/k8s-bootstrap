@@ -1,0 +1,14 @@
+controller:
+  rbac:
+    namespaced: false
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      interval: "30s"
+      additionalLabels:
+        release: "prom-operator"
+  podAnnotations:
+    promtail.io/collect: "true"
+  nodeSelector:
+    kubernetes.io/os: "linux"

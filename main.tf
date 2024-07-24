@@ -269,6 +269,31 @@ output "argo-workflows_version" {
     value = helm_release.argo-workflows.version
 }
 
+resource "helm_release" "argo-events" {
+    repository = "https://argoproj.github.io/argo-helm"
+    chart = "argo-events"
+    values = ["${file("./values/argo-events.yml")}"]
+    name = "argo-events"
+    version = "2.4.7"
+    namespace = "${kubernetes_namespace.argo-workflows-ns.id}"
+    create_namespace = false
+    depends_on = [
+        helm_release.cert-manager,
+        helm_release.nginx-ingress,
+        helm_release.argo-workflows,
+        helm_release.kube-prometheus-stack
+    ]
+}
+
+output "argo-events_version" {
+    value = helm_release.argo-events.version
+}
+
+resource "kubectl_manifest" "argo-events-bus" {
+    yaml_body = "${file("./values/argo-events-event-bus.yml")}"
+    depends_on = [helm_release.argo-events]
+}
+
 /*
     Deploy security components:
 */
