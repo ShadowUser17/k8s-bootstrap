@@ -15,6 +15,9 @@ rules:
       - "watch"
   - apiGroups: ["argoproj.io"]
     resources:
+      - "eventbus"
+      - "eventsources"
+      - "sensors"
       - "workflows"
       - "workflows/finalizers"
       - "workfloweventbindings"
