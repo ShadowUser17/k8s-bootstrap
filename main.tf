@@ -254,7 +254,7 @@ resource "helm_release" "argo-workflows" {
     chart = "argo-workflows"
     values = ["${file("./values/argo-workflows.yml")}"]
     name = "argo-workflows"
-    version = "0.41.12"
+    version = "0.41.13"
     namespace = "${kubernetes_namespace.argo-workflows-ns.id}"
     create_namespace = false
     depends_on = [
