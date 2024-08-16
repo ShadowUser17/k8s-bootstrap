@@ -1,6 +1,7 @@
 controller:
   replicaCount: 1
   allowSnippetAnnotations: true
+  terminationGracePeriodSeconds: 120
   ingressClassResource:
     default: false
   admissionWebhooks:
