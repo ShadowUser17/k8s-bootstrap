@@ -57,7 +57,7 @@ resource "helm_release" "nginx-ingress" {
     chart = "ingress-nginx"
     values = ["${file("./values/ingress-nginx.yml")}"]
     name = "ingress-nginx"
-    version = "4.11.1"
+    version = "4.11.2"
     namespace = "ingress-nginx"
     create_namespace = true
     depends_on = [helm_release.cert-manager]
