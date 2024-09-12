@@ -34,12 +34,15 @@ loki:
   query_scheduler:
     max_outstanding_requests_per_tenant: 32768
   compactor:
+    retention_enabled: true
     compaction_interval: "10m"
+    retention_delete_delay: "2h"
   ingester:
     chunk_idle_period: "5m"
     chunk_retain_period: "1m"
   limits_config:
     query_timeout: "500s"
+    retention_period: "30d"
     enforce_metric_name: false
     reject_old_samples: true
     ingestion_rate_mb: 50
