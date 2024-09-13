@@ -81,7 +81,7 @@ resource "helm_release" "kube-prometheus-stack" {
     chart = "kube-prometheus-stack"
     values = ["${file("./values/prometheus-operator.yml")}"]
     name = "prom-operator"
-    version = "62.6.0"
+    version = "62.7.0"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.cert-manager, helm_release.nginx-ingress]
