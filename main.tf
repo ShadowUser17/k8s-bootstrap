@@ -274,7 +274,7 @@ resource "helm_release" "argo-events" {
     chart = "argo-events"
     values = ["${file("./values/argo-events.yml")}"]
     name = "argo-events"
-    version = "2.4.7"
+    version = "2.4.8"
     namespace = "${kubernetes_namespace.argo-workflows-ns.id}"
     create_namespace = false
     depends_on = [
