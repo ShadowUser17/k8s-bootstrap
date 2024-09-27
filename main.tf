@@ -106,7 +106,7 @@ output "node-problem-detector_version" {
     value = helm_release.node-problem-detector.version
 }*/
 
-resource "helm_release" "blackbox-exporter" {
+/*resource "helm_release" "blackbox-exporter" {
     repository = "https://prometheus-community.github.io/helm-charts"
     chart = "prometheus-blackbox-exporter"
     values = ["${file("./values/blackbox-exporter.yml")}"]
@@ -119,7 +119,7 @@ resource "helm_release" "blackbox-exporter" {
 
 output "blackbox-exporter_version" {
     value = helm_release.blackbox-exporter.version
-}
+}*/
 
 resource "helm_release" "snmp-exporter" {
     repository = "https://prometheus-community.github.io/helm-charts"
