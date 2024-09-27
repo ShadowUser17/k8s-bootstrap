@@ -121,7 +121,7 @@ output "blackbox-exporter_version" {
     value = helm_release.blackbox-exporter.version
 }*/
 
-resource "helm_release" "snmp-exporter" {
+/*resource "helm_release" "snmp-exporter" {
     repository = "https://prometheus-community.github.io/helm-charts"
     chart = "prometheus-snmp-exporter"
     values = ["${file("./values/snmp-exporter.yml")}"]
@@ -134,7 +134,7 @@ resource "helm_release" "snmp-exporter" {
 
 output "snmp-exporter_version" {
     value = helm_release.snmp-exporter.version
-}
+}*/
 
 resource "helm_release" "loki" {
     repository = "https://grafana.github.io/helm-charts"
