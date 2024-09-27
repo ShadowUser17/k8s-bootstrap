@@ -212,7 +212,7 @@ output "minio_version" {
 /*
     Deploy CI/CD components:
 */
-resource "kubernetes_namespace" "argo-workflows-ns" {
+/*resource "kubernetes_namespace" "argo-workflows-ns" {
     metadata {
         name = "argo-workflows"
     }
@@ -267,7 +267,7 @@ resource "helm_release" "argo-workflows" {
 
 output "argo-workflows_version" {
     value = helm_release.argo-workflows.version
-}
+}*/
 
 /*resource "helm_release" "argo-events" {
     repository = "https://argoproj.github.io/argo-helm"
