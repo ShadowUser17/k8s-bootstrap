@@ -194,7 +194,7 @@ resource "kubectl_manifest" "ingress-nginx-monitor" {
 /*
     Deploy storage components:
 */
-resource "helm_release" "minio" {
+/*resource "helm_release" "minio" {
     repository = "https://charts.bitnami.com/bitnami"
     chart = "minio"
     values = ["${file("./values/minio.yml")}"]
@@ -207,7 +207,7 @@ resource "helm_release" "minio" {
 
 output "minio_version" {
     value = helm_release.minio.version
-}
+}*/
 
 /*
     Deploy CI/CD components:
