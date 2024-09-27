@@ -297,7 +297,7 @@ resource "kubectl_manifest" "argo-events-bus" {
 /*
     Deploy security components:
 */
-resource "helm_release" "tetragon" {
+/*resource "helm_release" "tetragon" {
     repository = "https://helm.cilium.io"
     chart = "tetragon"
     values = ["${file("./values/tetragon.yml")}"]
@@ -310,7 +310,7 @@ resource "helm_release" "tetragon" {
 
 output "tetragon_version" {
     value = helm_release.tetragon.version
-}
+}*/
 
 resource "helm_release" "trivy-operator" {
     repository = "https://aquasecurity.github.io/helm-charts"
