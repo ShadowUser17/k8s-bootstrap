@@ -1,10 +1,10 @@
 nodeSelector:
   kubernetes.io/os: "linux"
 
-image:
-  registry: "docker.io"
-  repository: "bitnami/kubernetes-event-exporter"
-  tag: "1.7.0"
+# image:
+#   registry: "docker.io"
+#   repository: "bitnami/kubernetes-event-exporter"
+#   tag: ""
 
 resources:
   requests:
