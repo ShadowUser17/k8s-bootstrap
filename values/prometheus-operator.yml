@@ -137,6 +137,15 @@ prometheus-node-exporter:
     monitor:
       interval: "30s"
 
+nodeExporter:
+  operatingSystems:
+    linux:
+      enabled: true
+    aix:
+      enabled: false
+    darwin:
+      enabled: false
+
 coreDns:
   serviceMonitor:
     interval: "1m"
