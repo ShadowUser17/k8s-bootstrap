@@ -136,6 +136,13 @@ prometheus-node-exporter:
   prometheus:
     monitor:
       interval: "30s"
+      relabelings:
+        - sourceLabels: ["__meta_kubernetes_pod_node_name"]
+          separator: ";"
+          regex: '^(.*)$'
+          targetLabel: "node"
+          replacement: '$1'
+          action: "replace"
 
 nodeExporter:
   operatingSystems:
