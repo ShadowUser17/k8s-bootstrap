@@ -62,7 +62,7 @@ prometheus:
     image:
       registry: "quay.io"
       repository: "prometheus/prometheus"
-      tag: "v2.54.1"
+      tag: "v2.55.0"
     resources:
       requests:
         memory: "850Mi"
