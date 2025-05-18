@@ -151,7 +151,7 @@ output "loki_version" {
     value = helm_release.loki.version
 }*/
 
-resource "helm_release" "promtail" {
+/*resource "helm_release" "promtail" {
     repository = "https://grafana.github.io/helm-charts"
     chart = "promtail"
     values = ["${file("./values/promtail.yml")}"]
@@ -164,7 +164,7 @@ resource "helm_release" "promtail" {
 
 output "promtail_version" {
     value = helm_release.promtail.version
-}
+}*/
 
 resource "helm_release" "event-exporter" {
     repository = "https://charts.bitnami.com/bitnami"
