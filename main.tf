@@ -1,6 +1,6 @@
 terraform {
     required_providers {
-        helm = "2.15.0"
+        helm = "2.17.0"
         kubernetes = "2.32.0"
 
         kubectl = {
