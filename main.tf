@@ -1,7 +1,7 @@
 terraform {
     required_providers {
         helm = "2.17.0"
-        kubernetes = "2.32.0"
+        kubernetes = "2.36.0"
 
         kubectl = {
             source = "gavinbunney/kubectl"
