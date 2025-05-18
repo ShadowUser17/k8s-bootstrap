@@ -166,7 +166,7 @@ output "promtail_version" {
     value = helm_release.promtail.version
 }*/
 
-resource "helm_release" "event-exporter" {
+/*resource "helm_release" "event-exporter" {
     repository = "https://charts.bitnami.com/bitnami"
     chart = "kubernetes-event-exporter"
     values = ["${file("./values/event-exporter.yml")}"]
@@ -179,7 +179,7 @@ resource "helm_release" "event-exporter" {
 
 output "event-exporter_version" {
     value = helm_release.event-exporter.version
-}
+}*/
 
 resource "kubectl_manifest" "cert-manager-monitor" {
     yaml_body = "${file("./monitoring/cert-manager.yml")}"
