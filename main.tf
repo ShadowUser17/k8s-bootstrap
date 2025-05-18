@@ -136,7 +136,7 @@ output "snmp-exporter_version" {
     value = helm_release.snmp-exporter.version
 }*/
 
-resource "helm_release" "loki" {
+/*resource "helm_release" "loki" {
     repository = "https://grafana.github.io/helm-charts"
     chart = "loki"
     values = ["${file("./values/loki.yml")}"]
@@ -149,7 +149,7 @@ resource "helm_release" "loki" {
 
 output "loki_version" {
     value = helm_release.loki.version
-}
+}*/
 
 resource "helm_release" "promtail" {
     repository = "https://grafana.github.io/helm-charts"
