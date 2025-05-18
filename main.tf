@@ -76,7 +76,7 @@ resource "kubernetes_namespace" "monitoring-stack-ns" {
     }
 }
 
-resource "helm_release" "kube-prometheus-stack" {
+/*resource "helm_release" "kube-prometheus-stack" {
     repository = "https://prometheus-community.github.io/helm-charts"
     chart = "kube-prometheus-stack"
     values = ["${file("./values/prometheus-operator.yml")}"]
@@ -89,7 +89,7 @@ resource "helm_release" "kube-prometheus-stack" {
 
 output "kube-prometheus-stack_version" {
     value = helm_release.kube-prometheus-stack.version
-}
+}*/
 
 /*resource "helm_release" "node-problem-detector" {
     repository = "https://charts.deliveryhero.io"
@@ -181,7 +181,7 @@ output "event-exporter_version" {
     value = helm_release.event-exporter.version
 }*/
 
-resource "kubectl_manifest" "cert-manager-monitor" {
+/*resource "kubectl_manifest" "cert-manager-monitor" {
     yaml_body = "${file("./monitoring/cert-manager.yml")}"
     depends_on = [helm_release.kube-prometheus-stack]
 }
@@ -189,7 +189,7 @@ resource "kubectl_manifest" "cert-manager-monitor" {
 resource "kubectl_manifest" "ingress-nginx-monitor" {
     yaml_body = "${file("./monitoring/ingress-nginx.yml")}"
     depends_on = [helm_release.kube-prometheus-stack]
-}
+}*/
 
 /*
     Deploy storage components:
