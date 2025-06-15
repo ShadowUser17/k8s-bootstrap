@@ -3,12 +3,12 @@ prometheusOperator:
   image:
     registry: "quay.io"
     repository: "prometheus-operator/prometheus-operator"
-    tag: "v0.77.2"
+    tag: "v0.83.0"
   prometheusConfigReloader:
     image:
       registry: "quay.io"
       repository: "prometheus-operator/prometheus-config-reloader"
-      tag: "v0.77.2"
+      tag: "v0.83.0"
   serviceMonitor:
     interval: "1m"
   admissionWebhooks:
@@ -31,7 +31,7 @@ alertmanager:
     image:
       registry: "quay.io"
       repository: "prometheus/alertmanager"
-      tag: "v0.27.0"
+      tag: "v0.28.1"
     alertmanagerConfigSelector:
       matchLabels:
         release: "prom-operator"
@@ -62,7 +62,7 @@ prometheus:
     image:
       registry: "quay.io"
       repository: "prometheus/prometheus"
-      tag: "v2.55.0"
+      tag: "v3.4.1"
     resources:
       requests:
         memory: "850Mi"
@@ -85,7 +85,7 @@ grafana:
   image:
     registry: "docker.io"
     repository: "grafana/grafana"
-    tag: "10.4.11"
+    tag: "12.0.1"
   additionalDataSources:
     - name: "Loki"
       type: "loki"
@@ -118,21 +118,17 @@ kube-state-metrics:
   image:
     registry: "registry.k8s.io"
     repository: "kube-state-metrics/kube-state-metrics"
-    tag: "v2.13.0"
+    tag: "v2.15.0"
   prometheus:
     monitor:
       interval: "30s"
-  # metricLabelsAllowlist:
-  #   - 'nodes=[node.kubernetes.io/instance-type,node-role.kubernetes.io/control-plane,node-role.kubernetes.io/master]'
-  #   - 'pods=[app.kubernetes.io/name]'
-  #   - 'ingresses=[app.kubernetes.io/name]'
 
 # Using default values from https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-node-exporter/values.yaml
 prometheus-node-exporter:
   image:
     registry: "quay.io"
     repository: "prometheus/node-exporter"
-    tag: "v1.8.2"
+    tag: "v1.9.1"
   prometheus:
     monitor:
       interval: "30s"
