@@ -1,6 +1,6 @@
 loki:
   image:
-    tag: "2.9.10"
+    tag: "3.5.1"
     registry: "docker.io"
     repository: "grafana/loki"
   auth_enabled: false
@@ -8,50 +8,35 @@ loki:
     replication_factor: 1
   schemaConfig:
     configs:
-      - from: "2023-01-05"
+      - from: "2024-04-01"
         store: "tsdb"
-        schema: "v12"
+        schema: "v13"
         object_store: "{{ .Values.loki.storage.type }}"
         index:
-          prefix: "index_"
+          prefix: "loki_index_"
           period: "24h"
-  storage:
-    type: "filesystem"
   server:
     log_level: "info"
-    http_server_read_timeout: "500s"
-    http_server_write_timeout: "500s"
-    grpc_server_max_recv_msg_size: 134217728
-    grpc_server_max_send_msg_size: 134217728
-  frontend:
-    compress_responses: true
-    log_queries_longer_than: "20s"
-  frontend_worker:
-    parallelism: 10
-    match_max_concurrent: false
+    http_server_read_timeout: "600s"
+    http_server_write_timeout: "600s"
+  storage:
+    type: "filesystem"
   querier:
-    max_concurrent: 10
-  query_scheduler:
-    max_outstanding_requests_per_tenant: 32768
+    max_concurrent: 2
+  ingester:
+    chunk_encoding: "snappy"
   compactor:
     retention_enabled: true
-    compaction_interval: "10m"
-    retention_delete_delay: "2h"
-  ingester:
-    chunk_idle_period: "5m"
-    chunk_retain_period: "1m"
   limits_config:
-    query_timeout: "500s"
     retention_period: "30d"
-    enforce_metric_name: false
     reject_old_samples: true
-    ingestion_rate_mb: 50
-    ingestion_burst_size_mb: 70
     reject_old_samples_max_age: "72h"
-    split_queries_by_interval: "15m"
-    max_query_parallelism: 32
     max_cache_freshness_per_query: "10m"
+    split_queries_by_interval: "15m"
+    query_timeout: "300s"
+    volume_enabled: true
 
+deploymentMode: "SingleBinary"
 singleBinary:
   replicas: 1
   podAnnotations:
@@ -63,10 +48,14 @@ singleBinary:
       memory: "850Mi"
     limits:
       memory: "850Mi"
+  extraEnv:
+    - name: "GOMEMLIMIT"
+      value: "800MiB"
   persistence:
-    volumeClaimsEnabled: true
-    storageClass: "local-path"
+    enabled: true
     size: "6Gi"
+    storageClass: "local-path"
+    enableStatefulSetAutoDeletePVC: false
 
 ingress:
   enabled: true
