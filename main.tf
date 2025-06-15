@@ -170,7 +170,7 @@ output "promtail_version" {
     chart = "kubernetes-event-exporter"
     values = ["${file("./values/event-exporter.yml")}"]
     name = "event-exporter"
-    version = "3.2.14"
+    version = "3.5.5"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
     depends_on = [helm_release.loki]
