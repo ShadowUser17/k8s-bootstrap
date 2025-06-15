@@ -297,12 +297,12 @@ resource "kubectl_manifest" "argo-events-bus" {
 /*
     Deploy security components:
 */
-/*resource "helm_release" "tetragon" {
+resource "helm_release" "tetragon" {
     repository = "https://helm.cilium.io"
     chart = "tetragon"
     values = ["${file("./values/tetragon.yml")}"]
     name = "tetragon"
-    version = "1.2.0"
+    version = "1.4.0"
     namespace = "kube-system"
     create_namespace = false
     depends_on = [helm_release.kube-prometheus-stack]
@@ -310,7 +310,7 @@ resource "kubectl_manifest" "argo-events-bus" {
 
 output "tetragon_version" {
     value = helm_release.tetragon.version
-}*/
+}
 
 /*resource "helm_release" "trivy-operator" {
     repository = "https://aquasecurity.github.io/helm-charts"
