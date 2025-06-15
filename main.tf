@@ -144,7 +144,6 @@ resource "helm_release" "loki" {
     version = "6.30.1"
     namespace = "${kubernetes_namespace.monitoring-stack-ns.id}"
     create_namespace = false
-    depends_on = [helm_release.kube-prometheus-stack]
 }
 
 output "loki_version" {
@@ -188,6 +187,11 @@ resource "kubectl_manifest" "cert-manager-monitor" {
 
 resource "kubectl_manifest" "ingress-nginx-monitor" {
     yaml_body = "${file("./monitoring/ingress-nginx.yml")}"
+    depends_on = [helm_release.kube-prometheus-stack]
+}
+
+resource "kubectl_manifest" "loki-monitor" {
+    yaml_body = "${file("./monitoring/loki-single.yml")}"
     depends_on = [helm_release.kube-prometheus-stack]
 }
 

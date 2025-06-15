@@ -1,0 +1,16 @@
+apiVersion: "monitoring.coreos.com/v1"
+kind: "PodMonitor"
+metadata:
+  name: "loki"
+  namespace: "monitoring"
+  labels:
+    release: "prom-operator"
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "loki"
+      app.kubernetes.io/instance: "loki"
+  podMetricsEndpoints:
+    - port: "http-metrics"
+      interval: "1m"
+      honorLabels: true
