@@ -23,7 +23,7 @@ serviceMonitor:
     release: "prom-operator"
 
 image:
-  tag: "2.9.10"
+  tag: "3.5.1"
   registry: "docker.io"
   repository: "grafana/promtail"
 
